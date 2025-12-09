@@ -322,46 +322,6 @@
         // Redirect to home page
         window.location.href = "index.html";
     }
-         function redirectToIndex() {
-        window.location.href = 'index.html';
-    }
-
-    // Remove login button completely
-    document.addEventListener("DOMContentLoaded", () => {
-        const loginBtn = document.querySelector(".login-button");
-        if (loginBtn) loginBtn.remove();
-    });
-
-    function validateAndSubmit() {
-        const fileInput = document.getElementById('file');
-        const errorMessage = document.getElementById('errorMessage');
-
-        if (!fileInput.files.length) {
-            errorMessage.textContent = 'Please upload an image or video to proceed.';
-            return;
-        }
-
-        const title = document.getElementById('title').value;
-        const description = document.getElementById('description').value;
-
-        const project = {
-            title,
-            description,
-            file: URL.createObjectURL(fileInput.files[0])
-        };
-
-        // Load old projects
-        let projects = JSON.parse(localStorage.getItem("projects")) || [];
-
-        // Add new project
-        projects.push(project);
-
-        // Save back
-        localStorage.setItem("projects", JSON.stringify(projects));
-
-        alert("Project submitted successfully!");
-        document.getElementById('uploadForm').reset();
-    }
         function redirectToIndex() {
             window.location.href = 'index.html';
         }
@@ -456,4 +416,5 @@
 </body>
 
 </html>
+
 
