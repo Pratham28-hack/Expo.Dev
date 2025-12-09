@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Your Project - Expo.dev</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Open Sans', sans-serif;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            background-size: cover;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .navbar {
+            width: 100%;
+            background: white;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            box-sizing: border-box;
+        }
+
+        .navbar .brand {
+            font-size: 1.8rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .navbar .login-button {
+            background-color: #6200ea;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .navbar .login-button:hover {
+            background-color: #4e00b4;
+        }
+
+        .upload-container {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            width: 90%;
+            max-width: 600px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            margin-top: 20px;
+        }
+
+        .upload-container h1 {
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        label {
+            text-align: left;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 5px;
+            font-size: 1rem;
+            font-family: sans-serif;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        textarea {
+            resize: none;
+            height: 100px;
+        }
+
+        .file-input {
+            padding: 5px;
+        }
+
+        .submit-button {
+            background-color: #6200ea;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .submit-button:hover {
+            background-color: #4e00b4;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 0.9rem;
+        }
+
+        .login-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login-modal-content {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .login-modal-content h2 {
+            margin-top: 0;
+        }
+
+        .login-modal-content input {
+            width: 100%;
+            padding: 5px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .login-modal-content button {
+            background-color: #6200ea;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .login-modal-content button:hover {
+            background-color: #4e00b4;
+        }
+
+        .rating-container {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .rating-container input {
+            display: none;
+        }
+
+        .rating-container label {
+            font-size: 2rem;
+            color: #ccc;
+            cursor: pointer;
+        }
+
+        .rating-container input:checked ~ label,
+        .rating-container input:hover ~ label {
+            color: #ffcc00;
+        }
+
+        .comment-container {
+            margin-top: 20px;
+        }
+
+        .comment-container textarea {
+            width: 100%;
+            padding: 10px;
+            font-size: 1rem;
+            font-family: sans-serif;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            resize: none;
+            height: 100px;
+        }
+
+        .comment-container button {
+            background-color: #6200ea;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .comment-container button:hover {
+            background-color: #4e00b4;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="brand" onclick="redirectToIndex()">Expo.dev</div>
+        <button class="login-button" onclick="openLoginModal()">Login</button>
+    </div>
+    <div class="upload-container">
+        <h1>Share Your Project</h1>
+        <form id="uploadForm">
+            <label for="title">Project Title</label>
+            <input type="text" id="title" name="title" placeholder="Enter Project Title" required>
+
+            <label for="description">Description</label>
+            <textarea id="description" name="description" placeholder="Describe Your Project"></textarea>
+
+            <label for="file">Upload Image or Video</label>
+            <input type="file" id="file" name="file" class="file-input" accept="image/*,video/*" required>
+
+            <div class="error-message" id="errorMessage"></div>
+
+            <button type="button" class="submit-button" onclick="validateAndSubmit()">Submit</button>
+        </form>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="login-modal" id="loginModal">
+        <div class="login-modal-content">
+            <h2>Login</h2>
+            <div id="emailLogin">
+                <input type="email" id="email" placeholder="Email">
+                <input type="password" id="password" placeholder="Password">
+                <button onclick="loginWithEmail()">Login with Email</button>
+            </div>
+            <div id="phoneLogin" style="display:none;">
+                <input type="text" id="phone" placeholder="Phone Number">
+                <input type="password" id="phonePassword" placeholder="Password">
+                <button onclick="loginWithPhone()">Login with Phone</button>
+            </div>
+            <div id="googleLogin" style="display:none;">
+                <button onclick="loginWithGoogle()">Login with Google</button>
+            </div>
+            <button onclick="showLoginOptions('email')">Email Login</button>
+            <button onclick="showLoginOptions('phone')">Phone Login</button>
+            <button onclick="showLoginOptions('google')">Google Login</button>
+            <button onclick="closeLoginModal()">Close</button>
+        </div>
+    </div>
+
+    <script>
+        function redirectToIndex() {
+            window.location.href = 'index.html';
+        }
+
+        function openLoginModal() {
+            document.getElementById('loginModal').style.display = 'flex';
+        }
+
+        function closeLoginModal() {
+            document.getElementById('loginModal').style.display = 'none';
+        }
+
+        function showLoginOptions(selected) {
+            if (selected === 'email') {
+                document.getElementById('emailLogin').style.display = 'block';
+                document.getElementById('phoneLogin').style.display = 'none';
+                document.getElementById('googleLogin').style.display = 'none';
+            } else if (selected === 'phone') {
+                document.getElementById('emailLogin').style.display = 'none';
+                document.getElementById('phoneLogin').style.display = 'block';
+                document.getElementById('googleLogin').style.display = 'none';
+            } else if (selected === 'google') {
+                document.getElementById('emailLogin').style.display = 'none';
+                document.getElementById('phoneLogin').style.display = 'none';
+                document.getElementById('googleLogin').style.display = 'block';
+            }
+        }
+
+        function loginWithEmail() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            firebase.auth().signInWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                    const user = userCredential.user;
+                    alert(`Welcome ${user.email}`);
+                })
+                .catch((error) => {
+                    console.error(error);
+                    alert('Login failed!');
+                });
+        }
+
+        function loginWithGoogle() {
+            const provider = new firebase.auth.GoogleAuthProvider();
+            firebase.auth().signInWithPopup(provider)
+                .then((result) => {
+                    const user = result.user;
+                    alert(`Welcome ${user.displayName}`);
+                })
+                .catch((error) => {
+                    console.error(error);
+                    alert('Login failed!');
+                });
+        }
+
+        function loginWithPhone() {
+            const phone = document.getElementById('phone').value;
+            const password = document.getElementById('phonePassword').value;
+            // Implement phone number login
+            alert(`Phone: ${phone}, Password: ${password}`);
+        }
+
+        function validateAndSubmit() {
+            const fileInput = document.getElementById('file');
+            const errorMessage = document.getElementById('errorMessage');
+
+            if (!fileInput.files.length) {
+                errorMessage.textContent = 'Please upload an image or video to proceed.';
+                return;
+            }
+
+            const title = document.getElementById('title').value;
+            const description = document.getElementById('description').value;
+
+            const project = {
+                title: title,
+                description: description,
+                file: URL.createObjectURL(fileInput.files[0])
+            };
+
+            localStorage.setItem('project', JSON.stringify(project));
+
+            errorMessage.textContent = '';
+            alert('Project submitted successfully!');
+            document.getElementById('uploadForm').reset();
+        }
+    </script>
+    <!-- Add Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-auth.js"></script>
+</body>
+</html>
