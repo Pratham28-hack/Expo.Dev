@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Expo.dev - Showcase Your Projects</title>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+
     <style>
         body {
             margin: 0;
@@ -26,22 +27,6 @@
         header h1 {
             margin: 0;
             font-size: 2rem;
-        }
-
-        .login-button {
-            background-color: white;
-            color: #6200ea;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: transform 0.2s ease;
-        }
-
-        .login-button:hover {
-            transform: scale(1.1);
         }
 
         .main {
@@ -127,11 +112,6 @@
             color: white;
         }
 
-        footer p {
-            margin: 0;
-            font-size: 1rem;
-        }
-
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
@@ -140,344 +120,106 @@
         .fade-in {
             animation: fadeIn 1.5s ease;
         }
-
-        .login-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            justify-content: center;
-            align-items: center;
-        }
-
-        .login-modal-content {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            width: 90%;
-            max-width: 400px;
-            text-align: center;
-        }
-
-        .login-modal-content h2 {
-            margin-top: 0;
-        }
-
-        .login-modal-content input {
-            width: 100%;
-            padding: 5px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        .login-modal-content button {
-            background-color: #6200ea;
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 5px;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            margin-top: 10px;
-        }
-
-        .login-modal-content button:hover {
-            background-color: #4e00b4;
-        }
-
-        .rating-container {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .rating-container input {
-            display: none;
-        }
-
-        .rating-container label {
-            font-size: 2rem;
-            color: #ccc;
-            cursor: pointer;
-        }
-
-        .rating-container input:checked ~ label,
-        .rating-container input:hover ~ label{
-            color: #ffcc00;
-        }
-
-        .comment-container {
-            margin-top: 20px;
-        }
-
-        .comment-container textarea {
-            width: 100%;
-            padding: 5px;
-            font-size: 1rem;
-            font-family: sans-serif;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            resize: none;
-            height: 100px;
-        }
-
-        .comment-container button {
-            background-color: #6200ea;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .comment-container button:hover {
-            background-color: #4e00b4;
-        }
     </style>
 </head>
+
 <body>
+
     <header>
         <h1>Expo.dev</h1>
-        <button class="login-button" onclick="openLoginModal()">Login</button>
+        <!-- Login button removed -->
     </header>
+
     <main class="main fade-in">
         <h1>Welcome to Expo.dev</h1>
-        <p>Expo.dev is a dynamic and inclusive platform built for aspiring developers to share their innovations with the world. Whether it's your first project or your latest breakthrough, our community offers a space to highlight your work through engaging visuals and detailed descriptions. Let your creativity shine, and draw inspiration from fellow developers while building your network and gaining recognition.</p>
+        <p>
+            Expo.dev is a dynamic and inclusive platform built for aspiring developers 
+            to share their innovations with the world. Whether it's your first project 
+            or your latest breakthrough, our community offers a space to highlight your 
+            work through engaging visuals and detailed descriptions.
+        </p>
 
         <div class="button-container">
             <button class="share-button" onclick="redirectToUploadPage()">Share Your Own</button>
         </div>
 
         <h2>Featured Projects</h2>
+
         <div class="projects" id="projects">
+
+            <!-- STATIC PROJECTS (existing) -->
             <div class="project">
-                <img src='C:\Users\user\Downloads\photo-1467232004584-a241de8bcf5d.jpg' alt="Project Thumbnail">
+                <img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d" alt="Project Thumbnail">
                 <div class="project-info">
-                    <h3>Responsive Template </h3>
+                    <h3>Responsive Template</h3>
                     <p>Short description of the project.</p>
                 </div>
             </div>
+
             <div class="project">
                 <video controls>
                     <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
                 </video>
                 <div class="project-info">
                     <h3>Project Title</h3>
                     <p>Short description of the project.</p>
                 </div>
             </div>
+
         </div>
     </main>
+
     <footer>
         <p>&copy; 2024 Expo.dev - All Rights Reserved</p>
     </footer>
 
-    <!-- Login Modal -->
-    <div class="login-modal" id="loginModal">
-        <div class="login-modal-content">
-            <h2>Login</h2>
-            <div id="emailLogin">
-                <input type="email" id="email" placeholder="Email">
-                <input type="password" id="password" placeholder="Password">
-                <button onclick="loginWithEmail()">Login with Email</button>
-            </div>
-            <div id="phoneLogin" style="display:none;">
-                <input type="text" id="phone" placeholder="Phone Number">
-                <input type="password" id="phonePassword" placeholder="Password">
-                <button onclick="loginWithPhone()">Login with Phone</button>
-            </div>
-            <div id="googleLogin" style="display:none;">
-                <button onclick="loginWithGoogle()">Login with Google</button>
-            </div>
-            <button onclick="showEmailLogin()">Email Login</button>
-            <button onclick="showPhoneLogin()">Phone Login</button>
-            <button onclick="showGoogleLogin()">Google Login</button>
-            <button onclick="closeLoginModal()">Close</button>
-        </div>
-    </div>
 
+    <!-- SCRIPTS -->
     <script>
-          // Remove login button
-    document.addEventListener("DOMContentLoaded", () => {
-        const loginBtn = document.querySelector(".login-button");
-        if (loginBtn) loginBtn.remove();
-    });
-
-    function redirectToUploadPage() {
-        window.location.href = 'upload.html';
-    }
-
-    function displayProjects() {
-        const projectsContainer = document.getElementById('projects');
-        const projects = JSON.parse(localStorage.getItem('projects')) || [];
-
-        projects.forEach(project => {
-            const projectCard = document.createElement("div");
-            projectCard.classList.add("project");
-
-            let media;
-
-            if (project.type === "video") {
-                media = document.createElement("video");
-                media.src = project.file;
-                media.controls = true;
-            } else {
-                media = document.createElement("img");
-                media.src = project.file;
-            }
-
-            const info = document.createElement("div");
-            info.classList.add("project-info");
-
-            const title = document.createElement("h3");
-            title.textContent = project.title;
-
-            const desc = document.createElement("p");
-            desc.textContent = project.description;
-
-            info.appendChild(title);
-            info.appendChild(desc);
-
-            projectCard.appendChild(media);
-            projectCard.appendChild(info);
-
-            projectsContainer.appendChild(projectCard);
-        });
-    }
-
-    document.addEventListener("DOMContentLoaded", displayProjects);
-        function openLoginModal() {
-            document.getElementById('loginModal').style.display = 'flex';
-        }
-
-        function closeLoginModal() {
-            document.getElementById('loginModal').style.display = 'none';
-        }
-
-        function showEmailLogin() {
-            document.getElementById('emailLogin').style.display = 'block';
-            document.getElementById('phoneLogin').style.display = 'none';
-            document.getElementById('googleLogin').style.display = 'none';
-        }
-
-        function showPhoneLogin() {
-            document.getElementById('emailLogin').style.display = 'none';
-            document.getElementById('phoneLogin').style.display = 'block';
-            document.getElementById('googleLogin').style.display = 'none';
-        }
-
-        function showGoogleLogin() {
-            document.getElementById('emailLogin').style.display = 'none';
-            document.getElementById('phoneLogin').style.display = 'none';
-            document.getElementById('googleLogin').style.display = 'block';
-        }
-
-        function loginWithEmail() {
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            // Implement email login
-            alert(`Email: ${email}, Password: ${password}`);
-        }
-
-        function loginWithGoogle() {
-            // Implement Google login
-            alert('Google login functionality coming soon!');
-        }
-
-        function loginWithPhone() {
-            const phone = document.getElementById('phone').value;
-            const password = document.getElementById('phonePassword').value;
-            // Implement phone number login
-            alert(`Phone: ${phone}, Password: ${password}`);
-        }
-
         function redirectToUploadPage() {
-            window.location.href = 'upload.html';
+            window.location.href = "upload.html";
         }
 
-        function displayProject() {
-            const projectsContainer = document.getElementById('projects');
-            const project = JSON.parse(localStorage.getItem('project'));
+        function displayProjects() {
+            const projectsContainer = document.getElementById("projects");
+            const projects = JSON.parse(localStorage.getItem("projects")) || [];
 
-            if (project) {
-                const projectElement = document.createElement('div');
-                projectElement.classList.add('project');
+            projects.forEach(project => {
+                const card = document.createElement("div");
+                card.classList.add("project");
 
-                let projectMedia;
-                if (project.file.match(/\.(jpeg|jpg|gif|png)$/)) {
-                    projectMedia = document.createElement('img');
-                    projectMedia.src = project.file;
-                } else if (project.file.match(/\.(mp4|webm|ogg)$/)) {
-                    projectMedia = document.createElement('video');
-                    projectMedia.src = project.file;
-                    projectMedia.controls = true;
+                let media;
+
+                if (project.type === "video") {
+                    media = document.createElement("video");
+                    media.src = project.file;
+                    media.controls = true;
+                } else {
+                    media = document.createElement("img");
+                    media.src = project.file;
                 }
 
-                const projectInfo = document.createElement('div');
-                projectInfo.classList.add('project-info');
+                const info = document.createElement("div");
+                info.classList.add("project-info");
 
-                const projectTitle = document.createElement('h3');
-                projectTitle.textContent = project.title;
+                const title = document.createElement("h3");
+                title.textContent = project.title;
 
-                const projectDescription = document.createElement('p');
-                projectDescription.textContent = project.description;
+                const desc = document.createElement("p");
+                desc.textContent = project.description;
 
-                const ratingContainer = document.createElement('div');
-                ratingContainer.classList.add('rating-container');
-                for (let i = 5; i >= 1; i--) {
-                    const starInput = document.createElement('input');
-                    starInput.type = 'radio';
-                    starInput.id = `star${i}`;
-                    starInput.name = 'rating';
-                    starInput.value = i;
+                info.appendChild(title);
+                info.appendChild(desc);
 
-                    const starLabel = document.createElement('label');
-                    starLabel.htmlFor = `star${i}`;
-                    starLabel.textContent = '★';
+                card.appendChild(media);
+                card.appendChild(info);
 
-                    ratingContainer.appendChild(starInput);
-                    ratingContainer.appendChild(starLabel);
-                }
-
-                const commentContainer = document.createElement('div');
-                commentContainer.classList.add('comment-container');
-
-                const commentTextarea = document.createElement('textarea');
-                commentTextarea.placeholder = 'Add a comment...';
-
-                const commentButton = document.createElement('button');
-                commentButton.textContent = 'Submit';
-                commentButton.onclick = function() {
-                    alert('Comment submitted!');
-                };
-
-                commentContainer.appendChild(commentTextarea);
-                commentContainer.appendChild(commentButton);
-
-                projectInfo.appendChild(projectTitle);
-                projectInfo.appendChild(projectDescription);
-                projectInfo.appendChild(ratingContainer);
-                projectInfo.appendChild(commentContainer);
-
-                projectElement.appendChild(projectMedia);
-                projectElement.appendChild(projectInfo);
-
-                projectsContainer.appendChild(projectElement);
-            }
+                projectsContainer.appendChild(card);
+            });
         }
 
-        document.addEventListener('DOMContentLoaded', displayProject);
+        document.addEventListener("DOMContentLoaded", displayProjects);
     </script>
+
 </body>
-
 </html>
-
-
