@@ -305,7 +305,7 @@
     </div>
 
     <script>
-          // Remove login button
+           // Remove login button
     document.addEventListener("DOMContentLoaded", () => {
         const loginBtn = document.querySelector(".login-button");
         if (loginBtn) loginBtn.remove();
@@ -319,12 +319,13 @@
         const projectsContainer = document.getElementById('projects');
         const projects = JSON.parse(localStorage.getItem('projects')) || [];
 
-        projects.forEach((project, index) => {
-            const projectElement = document.createElement('div');
-            projectElement.classList.add('project');
+        projects.forEach(project => {
+            const projectCard = document.createElement("div");
+            projectCard.classList.add("project");
 
             let media;
-            if (project.file.includes("video")) {
+
+            if (project.type === "video") {
                 media = document.createElement("video");
                 media.src = project.file;
                 media.controls = true;
@@ -344,10 +345,11 @@
 
             info.appendChild(title);
             info.appendChild(desc);
-            projectElement.appendChild(media);
-            projectElement.appendChild(info);
 
-            projectsContainer.appendChild(projectElement);
+            projectCard.appendChild(media);
+            projectCard.appendChild(info);
+
+            projectsContainer.appendChild(projectCard);
         });
     }
 
@@ -477,3 +479,4 @@
 </body>
 
 </html>
+
