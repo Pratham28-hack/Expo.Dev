@@ -305,6 +305,53 @@
     </div>
 
     <script>
+          // Remove login button
+    document.addEventListener("DOMContentLoaded", () => {
+        const loginBtn = document.querySelector(".login-button");
+        if (loginBtn) loginBtn.remove();
+    });
+
+    function redirectToUploadPage() {
+        window.location.href = 'upload.html';
+    }
+
+    function displayProjects() {
+        const projectsContainer = document.getElementById('projects');
+        const projects = JSON.parse(localStorage.getItem('projects')) || [];
+
+        projects.forEach((project, index) => {
+            const projectElement = document.createElement('div');
+            projectElement.classList.add('project');
+
+            let media;
+            if (project.file.includes("video")) {
+                media = document.createElement("video");
+                media.src = project.file;
+                media.controls = true;
+            } else {
+                media = document.createElement("img");
+                media.src = project.file;
+            }
+
+            const info = document.createElement("div");
+            info.classList.add("project-info");
+
+            const title = document.createElement("h3");
+            title.textContent = project.title;
+
+            const desc = document.createElement("p");
+            desc.textContent = project.description;
+
+            info.appendChild(title);
+            info.appendChild(desc);
+            projectElement.appendChild(media);
+            projectElement.appendChild(info);
+
+            projectsContainer.appendChild(projectElement);
+        });
+    }
+
+    document.addEventListener("DOMContentLoaded", displayProjects);
         function openLoginModal() {
             document.getElementById('loginModal').style.display = 'flex';
         }
@@ -428,4 +475,5 @@
         document.addEventListener('DOMContentLoaded', displayProject);
     </script>
 </body>
+
 </html>
